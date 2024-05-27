@@ -16,3 +16,16 @@ model User {
 
   @@map("users")
 }
+
+model Car {
+  id           String @id @default(uuid())
+  name         String
+  brand        String
+  model        String
+  year         Int
+  mileage      Int
+  transmission String
+  photo        String
+
+  @@map("cars")
+}
