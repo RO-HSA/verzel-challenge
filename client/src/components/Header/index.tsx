@@ -8,16 +8,18 @@ import styles from "./Header.module.css";
 
 const Header = () => {
   const { container, navbar, navbarItem } = styles;
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(true);
 
   return (
     <div className={container}>
-      <img src={logo} alt="Logo" />
+      <Link to="/">
+        <img src={logo} alt="Logo" width={118} height={89} />
+      </Link>
       <nav className={navbar}>
         {isLogged ? (
-          <Link to="/painel" className={navbarItem}>
+          <Link to="/admin" className={navbarItem}>
             <FaClipboardUser size={24} />
-            <span>Painel</span>
+            <span>Admin</span>
           </Link>
         ) : (
           <>

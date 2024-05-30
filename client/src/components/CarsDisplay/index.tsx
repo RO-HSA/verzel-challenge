@@ -1,14 +1,13 @@
+import { useCarsQuery } from "@/hooks/queries/CarsQueries";
+
 import Card from "./Card";
-import styles from "./CarsDisplay.module.css";
 
 const CarsDisplay = () => {
-  const { container } = styles;
+  const { data } = useCarsQuery();
 
   return (
-    <div className={container}>
-      <Card />
-      <Card />
-      <Card />
+    <div className="container" style={{ gap: "16px", flexWrap: "wrap" }}>
+      {data?.map(item => <Card key={item.id} data={item} />)}
     </div>
   );
 };

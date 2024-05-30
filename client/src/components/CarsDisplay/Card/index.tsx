@@ -1,8 +1,14 @@
 import placeholder from "@/assets/example-car.webp";
+import { Cars } from "@/types/cars";
+import { FC } from "react";
 
 import styles from "./Card.module.css";
 
-const Card = () => {
+interface Props {
+  data: Cars;
+}
+
+const Card: FC<Props> = ({ data }) => {
   const {
     wrapper,
     cardHeader,
@@ -18,7 +24,7 @@ const Card = () => {
     <div className={wrapper}>
       <img src={placeholder} />
       <div className={cardHeader}>
-        <h3 className={title}>Ford • Ka</h3>
+        <h3 className={title}>{`${data.brand} • ${data.model}`}</h3>
         <span className={subtitle}>
           2020 • 39.093 km • TI-VCT SE PLUS • Manual
         </span>
