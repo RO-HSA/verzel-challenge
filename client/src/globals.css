@@ -1,0 +1,24 @@
+:root {
+  --background: #f1f1f1;
+  --text: #1b2532;
+  --text-light: rgb(27, 37, 50, 0.5);
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background);
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}

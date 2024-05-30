@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 265px;
+  height: 84px;
+  background-color: white;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbarItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: bold;
+  color: var(--text-light);
+  transition: color .4s ease;
+}
+
+.navbarItem:hover {
+  color: var(--text);
+}
