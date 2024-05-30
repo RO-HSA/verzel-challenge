@@ -13,7 +13,7 @@ const RegisterForm = () => {
     console.log(response);
   };
 
-  const onError = (error: Error) => {};
+  const onError = () => {};
 
   const { mutate, isPending } = useRegisterMutation(onSuccess, onError);
 

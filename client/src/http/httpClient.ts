@@ -1,8 +1,9 @@
 import { Cars } from "@/types/cars";
-import { UserInfo } from "@/types/user";
+import { Login } from "@/types/login";
+import { Register } from "@/types/register";
+import { UserInfo, UserTokens } from "@/types/user";
 import { TOKEN_KEY } from "@/utils/keys";
 import { logout } from "@/utils/utils";
-import { Register } from "@tanstack/react-query";
 import axios from "axios";
 
 const apiClient = axios.create({
@@ -46,9 +47,14 @@ const register = async (data: Register) => {
   return await apiClient.post<UserInfo>("users", data);
 };
 
+const login = async (data: Login) => {
+  return await apiClient.post<UserTokens>("auth", data);
+};
+
 const apiServices = {
   getCars,
   register,
+  login,
 };
 
 export default apiServices;

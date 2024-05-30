@@ -4,3 +4,8 @@ export interface UserInfo {
   email: string;
   user_type: "adm" | "user";
 }
+
+export interface UserTokens {
+  access_token: string;
+  refresh_token: string;
+}

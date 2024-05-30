@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useLoginMutation } from "@/hooks/queries/UsersQueries";
+import { LoginResponse } from "@/types/login";
+import { REFRESH_KEY, TOKEN_KEY } from "@/utils/keys";
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Loading from "../UI/Loading";
 
@@ -6,10 +10,27 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
+  const onSuccess = (response: LoginResponse) => {
+    localStorage.setItem(TOKEN_KEY, response.data.access_token);
+    localStorage.setItem(REFRESH_KEY, response.data.refresh_token);
+    navigate("/");
+  };
+
+  const onError = () => {};
+
+  const { mutate, isPending } = useLoginMutation(onSuccess, onError);
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    mutate({ email, password });
+  };
+
   return (
-    <div className="formContainer">
+    <div className="container">
       <div className="wrapper">
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit}>
           <div className="inputGroup">
             <label htmlFor="email">E-mail</label>
             <input
@@ -33,7 +54,7 @@ const LoginForm = () => {
             />
           </div>
           <div className="btnContainer">
-            {password ? (
+            {isPending ? (
               <Loading />
             ) : (
               <button type="submit" className="loginBtn">
