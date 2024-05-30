@@ -1,0 +1,44 @@
+.wrapper {
+  max-width: 274px;
+  background-color: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.wrapper img {
+  max-width: 274px;
+  width: 100%;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.cardHeader {
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+}
+
+.title {
+  color: var(--text);
+}
+
+.subtitle {
+  color: var(--subtitle);
+  font-size: .875rem;
+}
+
+.priceItem {
+  padding: 12px 16px;
+}
+
+.priceItem > span {
+  color: var(--text-secondary);
+}
+
+.priceWrapper {
+  color: var(--text);
+  font-weight: bold;
+}
+
+.price {
+  font-size: 26px;
+}

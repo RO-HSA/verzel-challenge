@@ -2,6 +2,9 @@
   --background: #f1f1f1;
   --text: #1b2532;
   --text-light: rgb(27, 37, 50, 0.5);
+  --text-secondary: #3e4a5b;
+  --subtitle: rgb(27, 37, 50, 0.8);
+  --border: rgb(0, 0, 0, 0.1);
 }
 
 * {
@@ -13,6 +16,10 @@
 
 body {
   background-color: var(--background);
+}
+
+header {
+  margin-bottom: 86px;
 }
 
 a {

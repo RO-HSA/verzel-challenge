@@ -1,10 +1,16 @@
-import Header from "../../components/Header";
+import CarsDisplay from "@/components/CarsDisplay";
+import Header from "@/components/Header";
 
 const Home = () => {
   return (
-    <header>
-      <Header />
-    </header>
+    <>
+      <header>
+        <Header />
+      </header>
+      <main>
+        <CarsDisplay />
+      </main>
+    </>
   );
 };
 
