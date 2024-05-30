@@ -1,5 +1,5 @@
-import CarsDisplay from "@/components/CarsDisplay";
 import Header from "@/components/Header";
+import { Outlet } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -8,7 +8,7 @@ const Home = () => {
         <Header />
       </header>
       <main>
-        <CarsDisplay />
+        <Outlet />
       </main>
     </>
   );

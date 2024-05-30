@@ -29,3 +29,69 @@ a {
 li {
   list-style: none;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 22px 15px;
+  max-height: 490px;
+  width: 380px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 43px 24px 12px 24px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text);
+}
+
+.inputGroup label {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.inputGroup input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #000;
+  color: var(--text-secondary);
+}
+
+.btnContainer {
+  align-self: center;
+}
+
+.loginBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  width: 300px;
+  background-color: var(--text);
+  color: #ffffff;
+  border: #ffffff;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .4s ease;
+}
+
+.loginBtn:hover {
+  background-color: var(--subtitle);
+}
