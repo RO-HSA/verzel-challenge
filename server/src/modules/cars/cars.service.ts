@@ -2,13 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { PrismaService } from 'src/prisma.service';
+import { deletePhoto, uploadPhoto } from 'src/utils/photo';
 
 @Injectable()
 export class CarsService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateCarDto) {
-    const car = await this.prisma.car.create({ data })
+    const photo = await uploadPhoto(data.photo)
+
+    const car = await this.prisma.car.create({
+      data: {
+        ...data,
+        photo
+      }
+    })
 
     return car
   }
@@ -32,9 +40,12 @@ export class CarsService {
       throw new Error("Car does not exists")
     }
 
+    const photo = carExists.photo as string
+
     return await this.prisma.car.update({
       data: {
-        ...data
+        ...data,
+        photo
       },
       where: {
         id
@@ -43,6 +54,12 @@ export class CarsService {
   }
 
   async remove(id: string) {
+    const car = await this.prisma.car.findFirst({ where: { id } })
+
+    const url = car.photo
+
+    await deletePhoto(url)
+
     return await this.prisma.car.delete({
       where: {
         id

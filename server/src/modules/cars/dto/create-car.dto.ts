@@ -5,6 +5,7 @@ export class CreateCarDto {
     model: string
     year: number
     mileage: number
+    price: number
     transmission: string
-    photo: string
+    photo: FileList
 }
