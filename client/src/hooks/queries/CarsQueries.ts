@@ -1,9 +1,9 @@
 import apiServices from "@/http/httpClient";
-import { Cars } from "@/types/cars";
+import { CarResponse } from "@/types/cars";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useCarsQuery = () => {
-  return useQuery<Cars[]>({
+  return useQuery<CarResponse[]>({
     queryKey: ["/cars"],
     queryFn: apiServices.getCars,
   });

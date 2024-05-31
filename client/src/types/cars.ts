@@ -5,6 +5,11 @@ export interface Cars {
   model: string;
   year: number;
   mileage: number;
+  price: number;
   transmission: string;
+  photo: FileList | null | string;
+}
+
+export interface CarResponse extends Cars {
   photo: string;
 }

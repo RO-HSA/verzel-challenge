@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import Admin from "./components/Admin";
 import CarsDisplay from "./components/CarsDisplay";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <LoginForm />,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
       },
     ],
   },

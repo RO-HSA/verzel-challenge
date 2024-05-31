@@ -1,7 +1,6 @@
 .container {
   display: flex;
-  justify-content: space-between;
-  padding: 0 265px;
+  justify-content: center;
   height: 84px;
   background-color: white;
 }
@@ -9,7 +8,10 @@
 .navbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
+  max-width: 980px;
+  width: 100%;
 }
 
 .navbarItem {

@@ -12,10 +12,10 @@ const Header = () => {
 
   return (
     <div className={container}>
-      <Link to="/">
-        <img src={logo} alt="Logo" width={118} height={89} />
-      </Link>
       <nav className={navbar}>
+        <Link to="/">
+          <img src={logo} alt="Logo" width={118} height={89} />
+        </Link>
         {isLogged ? (
           <Link to="/admin" className={navbarItem}>
             <FaClipboardUser size={24} />

@@ -1,4 +1,4 @@
-import { Cars } from "@/types/cars";
+import { CarResponse, Cars } from "@/types/cars";
 import { Login } from "@/types/login";
 import { Register } from "@/types/register";
 import { UserInfo, UserTokens } from "@/types/user";
@@ -38,7 +38,7 @@ apiClient.interceptors.response.use(
 const getCars = async ({ queryKey }: any) => {
   const queryUrl = queryKey[0];
 
-  const { data } = await apiClient.get<Cars[]>(queryUrl);
+  const { data } = await apiClient.get<CarResponse[]>(queryUrl);
 
   return data;
 };

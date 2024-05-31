@@ -1,4 +1,3 @@
-import placeholder from "@/assets/example-car.webp";
 import { Cars } from "@/types/cars";
 import { FC } from "react";
 
@@ -6,9 +5,10 @@ import styles from "./Card.module.css";
 
 interface Props {
   data: Cars;
+  photo: string;
 }
 
-const Card: FC<Props> = ({ data }) => {
+const Card: FC<Props> = ({ data, photo }) => {
   const {
     wrapper,
     cardHeader,
@@ -22,11 +22,11 @@ const Card: FC<Props> = ({ data }) => {
 
   return (
     <div className={wrapper}>
-      <img src={placeholder} />
+      <img src={photo} />
       <div className={cardHeader}>
         <h3 className={title}>{`${data.brand} • ${data.model}`}</h3>
         <span className={subtitle}>
-          2020 • 39.093 km • TI-VCT SE PLUS • Manual
+          {`${data.year} • ${data.mileage} km • ${data.name} • ${data.transmission}`}
         </span>
       </div>
       <div className={priceItem}>
