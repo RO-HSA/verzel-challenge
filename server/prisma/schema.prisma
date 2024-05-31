@@ -24,6 +24,7 @@ model Car {
   model        String
   year         Int
   mileage      Int
+  price        Int
   transmission String
   photo        String
 
