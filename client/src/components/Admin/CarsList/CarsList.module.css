@@ -1,0 +1,23 @@
+.line {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.toolkit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.edit {
+  color: #27ae60;
+  cursor: pointer;
+}
+
+.del {
+  color: #e74c3c;
+  cursor: pointer;
+}

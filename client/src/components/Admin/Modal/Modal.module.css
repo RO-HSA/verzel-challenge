@@ -1,0 +1,66 @@
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.73);
+  z-index: 1;
+}
+
+.modalIsVisible {
+  display: flex;
+}
+
+.modalContent {
+  width: 380px;
+  background-color: #fff;
+  z-index: 2;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.inputGroup label {
+  color: var(--text);
+  font-weight: bold;
+}
+
+.inputGroup input {
+  color: var(--text);
+  border-radius: 2px;
+  padding: 6px;
+  border: 1px solid var(--text-light);
+}
+
+.inputGroup select {
+  max-width: 120px;
+  border-radius: 2px;
+  padding: 6px;
+  border: 1px solid var(--text-light);
+}
+
+.inputGroup select option {
+  color: var(--text);
+}

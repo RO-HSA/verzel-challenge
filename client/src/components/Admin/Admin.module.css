@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #fff;
+  padding: 16px;
+  width: 980px;
+}
+
+.wrapper h2 {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+}
+
+.wrapper button {
+  max-width: 110px;
+  padding: 6px;
+  border: none;
+  border-radius: 4px;
+  background-color: #3498db;
+  color: #ecf0f1;
+  cursor: pointer;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
