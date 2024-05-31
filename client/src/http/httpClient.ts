@@ -43,6 +43,13 @@ const getCars = async ({ queryKey }: any) => {
   return data;
 };
 
+const createCar = async (data: Cars) => {
+  return await apiClient.post("cars", data);
+};
+const deleteCar = async (data: string | undefined) => {
+  return await apiClient.delete(`cars/${data}`);
+};
+
 const register = async (data: Register) => {
   return await apiClient.post<UserInfo>("users", data);
 };
@@ -53,6 +60,8 @@ const login = async (data: Login) => {
 
 const apiServices = {
   getCars,
+  createCar,
+  deleteCar,
   register,
   login,
 };
