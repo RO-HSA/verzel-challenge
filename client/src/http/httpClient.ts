@@ -46,8 +46,25 @@ const getCars = async ({ queryKey }: any) => {
 const createCar = async (data: Cars) => {
   return await apiClient.post("cars", data);
 };
-const deleteCar = async (data: string | undefined) => {
-  return await apiClient.delete(`cars/${data}`);
+
+const updateCar = async (data: Cars) => {
+  const id = data.id;
+
+  const payload = {
+    name: data.name,
+    brand: data.brand,
+    model: data.model,
+    year: data.year,
+    mileage: data.mileage,
+    price: data.price,
+    transmission: data.transmission,
+  };
+
+  return await apiClient.patch(`cars/${id}`, payload);
+};
+
+const deleteCar = async (id: string | undefined) => {
+  return await apiClient.delete(`cars/${id}`);
 };
 
 const register = async (data: Register) => {
@@ -61,6 +78,7 @@ const login = async (data: Login) => {
 const apiServices = {
   getCars,
   createCar,
+  updateCar,
   deleteCar,
   register,
   login,

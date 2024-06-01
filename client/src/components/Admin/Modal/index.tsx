@@ -1,54 +1,101 @@
-import { useCarMutation } from "@/hooks/queries/CarsQueries";
-import { FC, FormEvent, useState } from "react";
+import {
+  initialModalContent,
+  modalContentAtom,
+  modalIsVisibleAtom,
+  modalAddMode,
+} from "@/atoms/modal";
+import Button from "@/components/UI/Button";
+import {
+  useCarMutation,
+  useCarUpdateMutation,
+} from "@/hooks/queries/CarsQueries";
+import { uploadPhoto } from "@/utils/uploadPhoto";
+import { useAtom } from "jotai";
+import { FC, FormEvent } from "react";
+import { IoCloseOutline } from "react-icons/io5";
 
 import styles from "./Modal.module.css";
 
 const Modal: FC = () => {
-  const { modal, overlay, modalContent, form, inputGroup, submitBtn } = styles;
+  const { modal, overlay, modalContent, form, inputGroup } = styles;
 
-  const [isVisible, setIsVisible] = useState(true);
-  const [name, setName] = useState("");
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [year, setYear] = useState("");
-  const [mileage, setMileage] = useState("");
-  const [price, setPrice] = useState("");
-  const [transmission, setTransmission] = useState("Automático");
-  const [photo, setPhoto] = useState<FileList | null>(null);
+  const [content, setContent] = useAtom(modalContentAtom);
+  const [isVisible, setIsVisible] = useAtom(modalIsVisibleAtom);
+  const [addMode] = useAtom(modalAddMode);
 
   const onError = () => {};
 
-  const { mutate } = useCarMutation(onError);
+  const { mutate: createMutate } = useCarMutation(onError);
+  const { mutate: updateMutate } = useCarUpdateMutation(onError);
 
   const closeModal = () => {
     setIsVisible(!isVisible);
+    setContent(initialModalContent);
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleAddSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    mutate({
-      name,
-      brand,
-      model,
-      year: Number(year),
-      mileage: Number(mileage),
-      price: Number(price),
-      transmission,
-      photo,
-    });
+
+    const photo = await uploadPhoto(content.photo);
+
+    if (photo) {
+      createMutate({
+        name: content.name,
+        brand: content.brand,
+        model: content.model,
+        year: Number(content.year),
+        mileage: Number(content.mileage),
+        price: Number(content.price),
+        transmission: content.transmission,
+        photo,
+      });
+    }
+  };
+
+  const handleEditSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const photo = await uploadPhoto(content.photo);
+
+    if (photo) {
+      updateMutate({
+        id: content.id,
+        name: content.name,
+        brand: content.brand,
+        model: content.model,
+        year: Number(content.year),
+        mileage: Number(content.mileage),
+        price: Number(content.price),
+        transmission: content.transmission,
+        photo,
+      });
+    }
   };
 
   return (
     <div style={{ display: isVisible ? "flex" : "none" }} className={modal}>
       <div className={modalContent}>
-        <form className={form} onSubmit={handleSubmit}>
+        <IoCloseOutline
+          style={{
+            position: "absolute",
+            top: "4px",
+            right: "4px",
+            cursor: "pointer",
+          }}
+          size={16}
+          onClick={closeModal}
+        />
+        <form
+          className={form}
+          onSubmit={addMode ? handleAddSubmit : handleEditSubmit}
+        >
           <div className={inputGroup}>
             <label htmlFor="name">Nome</label>
             <input
               type="text"
               id="name"
-              value={name}
-              onChange={e => setName(e.target.value)}
+              value={content.name}
+              onChange={e => setContent({ ...content, name: e.target.value })}
             />
           </div>
           <div className={inputGroup}>
@@ -56,8 +103,8 @@ const Modal: FC = () => {
             <input
               type="text"
               id="brand"
-              value={brand}
-              onChange={e => setBrand(e.target.value)}
+              value={content.brand}
+              onChange={e => setContent({ ...content, brand: e.target.value })}
             />
           </div>
           <div className={inputGroup}>
@@ -65,8 +112,8 @@ const Modal: FC = () => {
             <input
               type="text"
               id="model"
-              value={model}
-              onChange={e => setModel(e.target.value)}
+              value={content.model}
+              onChange={e => setContent({ ...content, model: e.target.value })}
             />
           </div>
           <div className={inputGroup}>
@@ -74,8 +121,8 @@ const Modal: FC = () => {
             <input
               type="number"
               id="year"
-              value={year}
-              onChange={e => setYear(e.target.value)}
+              value={content.year}
+              onChange={e => setContent({ ...content, year: e.target.value })}
             />
           </div>
           <div className={inputGroup}>
@@ -83,8 +130,10 @@ const Modal: FC = () => {
             <input
               type="number"
               id="mileage"
-              value={mileage}
-              onChange={e => setMileage(e.target.value)}
+              value={content.mileage}
+              onChange={e =>
+                setContent({ ...content, mileage: e.target.value })
+              }
             />
           </div>
           <div
@@ -99,8 +148,10 @@ const Modal: FC = () => {
               <select
                 name="transmission"
                 id="transmission"
-                value={transmission}
-                onChange={e => setTransmission(e.target.value)}
+                value={content.transmission}
+                onChange={e =>
+                  setContent({ ...content, transmission: e.target.value })
+                }
               >
                 <option value="Automático">Automático</option>
                 <option value="Manual">Manual</option>
@@ -111,23 +162,35 @@ const Modal: FC = () => {
               <input
                 type="number"
                 id="price"
-                value={price}
-                onChange={e => setPrice(e.target.value)}
+                value={content.price}
+                onChange={e =>
+                  setContent({ ...content, price: e.target.value })
+                }
               />
             </div>
           </div>
-          <div className={inputGroup}>
-            <label htmlFor="photo">Foto</label>
-            <input
-              type="file"
-              name="photo"
-              id="photo"
-              onChange={e => setPhoto(e.target.files)}
-            />
-          </div>
-          <button type="submit" className={submitBtn}>
-            Enviar
-          </button>
+          {addMode && (
+            <div className={inputGroup}>
+              <label htmlFor="photo">Foto</label>
+              <input
+                type="file"
+                name="photo"
+                id="photo"
+                onChange={e =>
+                  setContent({ ...content, photo: e.target.files })
+                }
+              />
+            </div>
+          )}
+          {addMode ? (
+            <Button type="submit" alignSelf="center">
+              Adicionar
+            </Button>
+          ) : (
+            <Button type="submit" alignSelf="center">
+              Editar
+            </Button>
+          )}
         </form>
       </div>
       <div className={overlay} onClick={closeModal}></div>

@@ -1,9 +1,16 @@
 import {
+  modalAddMode,
+  modalContentAtom,
+  modalIsVisibleAtom,
+  ModalType,
+} from "@/atoms/modal";
+import {
   useCarDeletionMutation,
   useCarsQuery,
 } from "@/hooks/queries/CarsQueries";
 import { CarResponse } from "@/types/cars";
-import { FC } from "react";
+import { useAtom } from "jotai";
+import { FC, Fragment, SetStateAction } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
@@ -20,6 +27,10 @@ const CarsList: FC<Props> = ({ data }) => {
 
   const { refetch } = useCarsQuery();
 
+  const [isVisible, setIsVisible] = useAtom(modalIsVisibleAtom);
+  const [, setModalContent] = useAtom(modalContentAtom);
+  const [, setMode] = useAtom(modalAddMode);
+
   const { mutate } = useCarDeletionMutation(onError);
 
   const handleDeleteClick = (carId: string | undefined) => {
@@ -27,13 +38,23 @@ const CarsList: FC<Props> = ({ data }) => {
     refetch();
   };
 
+  const handleEditClick = (data: SetStateAction<ModalType>) => {
+    setIsVisible(!isVisible);
+    setModalContent(data);
+    setMode(false);
+  };
+
   return (
     <>
       {data?.map(car => (
-        <>
+        <Fragment key={car.id}>
           <div className={line}>
             <div className={toolkit}>
-              <FaEdit className={edit} size={20} />
+              <FaEdit
+                className={edit}
+                size={20}
+                onClick={() => handleEditClick(car as unknown as ModalType)}
+              />
               <MdDelete
                 className={del}
                 size={20}
@@ -48,7 +69,7 @@ const CarsList: FC<Props> = ({ data }) => {
             <span>{car.transmission}</span>
             <span>{car.price}</span>
           </div>
-        </>
+        </Fragment>
       ))}
     </>
   );

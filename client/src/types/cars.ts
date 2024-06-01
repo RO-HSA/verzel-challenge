@@ -3,9 +3,9 @@ export interface Cars {
   name: string;
   brand: string;
   model: string;
-  year: number;
-  mileage: number;
-  price: number;
+  year: number | string;
+  mileage: number | string;
+  price: number | string;
   transmission: string;
   photo: FileList | null | string;
 }

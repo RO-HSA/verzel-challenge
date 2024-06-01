@@ -16,6 +16,13 @@ export const useCarMutation = (onError: (error: Error) => void) => {
   });
 };
 
+export const useCarUpdateMutation = (onError: (error: Error) => void) => {
+  return useMutation({
+    mutationFn: apiServices.updateCar,
+    onError,
+  });
+};
+
 export const useCarDeletionMutation = (onError: (error: Error) => void) => {
   return useMutation({
     mutationFn: apiServices.deleteCar,
