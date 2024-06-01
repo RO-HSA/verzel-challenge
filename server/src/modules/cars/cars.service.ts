@@ -2,20 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { PrismaService } from 'src/prisma.service';
-import { deletePhoto, uploadPhoto } from 'src/utils/photo';
+import { deletePhoto } from 'src/utils/photo';
 
 @Injectable()
 export class CarsService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateCarDto) {
-    const photo = await uploadPhoto(data.photo)
 
     const car = await this.prisma.car.create({
-      data: {
-        ...data,
-        photo
-      }
+      data
     })
 
     return car
